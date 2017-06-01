@@ -1343,6 +1343,7 @@ Vue.component("country-select", {
          */
         countryChanged: function countryChanged() {
             this.selectedStateId = null;
+            this.localization.currentShippingCountryId = this.selectedCountryId;
         },
 
 
