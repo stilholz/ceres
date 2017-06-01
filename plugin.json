@@ -24,6 +24,16 @@
             "key":"Ceres\\Containers\\CeresLastSeenContainer",
             "name":"Last seen items",
             "description":"Display a list of last seen items in your online store"
+        },
+        {
+            "key"           :"Ceres\\Containers\\SingleItemTabContainer",
+            "name"          :"SingleItemTabContainer",
+            "description"   :"SingleItemTabContainer"
+        },
+        {
+            "key"           :"Ceres\\Containers\\SingleItemContentContainer",
+            "name"          :"SingleItemContentContainer",
+            "description"   :"SingleItemContentContainer"
         }
     ],
     "containers"        :
