@@ -20,8 +20,6 @@
 
 {% block PageBody %}
 
-    {{ services.lastSeen.setLastSeenMaxCount(config("Ceres.item.lists.last_seen")) }}
-
     {{ component( "Ceres::Item.Components.VariationSelect" ) }}
     {{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
     {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
