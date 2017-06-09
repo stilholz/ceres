@@ -1,0 +1,241 @@
+/* Vue 2.x */
+/*
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+*/
+
+/* Vue 1.x */
+.breadcrumb-item-transition {
+  transition: all 1s ease;
+  overflow: hidden;
+}
+.breadcrumb-item-enter, .breadcrumb-item-leave {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.menu[class^='animate-'],
+.menu[class*=' animate-'] {
+  visibility: visible !important;
+}
+
+.animate-outToRight .menu-item {
+  -webkit-animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+  animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+@-webkit-keyframes outToRight {
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes outToRight {
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+.animate-outToLeft .menu-item {
+  -webkit-animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+  animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+@-webkit-keyframes outToLeft {
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes outToLeft {
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.animate-inFromLeft .menu-item {
+  -webkit-animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+  animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+@-webkit-keyframes inFromLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes inFromLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-inFromRight .menu-item {
+  -webkit-animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+  animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+@-webkit-keyframes inFromRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes inFromRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+#MobileNavigation {
+  $highlight-color: #5c5edc;
+  $breadcrumb-hover-color: #8182e0;
+  $item-color: #bdbdbd;
+
+  background-color: #1c1d22;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+
+  .menu-wrap {
+    position: absolute;
+    bottom: 0;
+    top: 3.5em;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .menu {
+    &.menu-active {
+      visibility: visible;
+    }
+
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    li.menu-item {
+      clear: both;
+
+      a {
+        padding: 0.6em 1em;
+        display: inline-block;
+        color: $item-color;
+        text-decoration: none;
+
+        &:hover {
+          color: $highlight-color;
+        }
+
+        &.dots {
+          float: right;
+        }
+      }
+    }
+  }
+
+  .top-menu {
+    clear: both;
+    overflow: hidden;
+    padding: 1em 1em 0 1em;
+
+    ul.breadcrumb {
+      overflow: hidden;
+      float: left;
+      padding: 0;
+      margin: 0;
+      color: $highlight-color;
+
+      li {
+        float: left;
+        display: block;
+        padding: 0;
+
+        &::before {
+          content: '→';
+          margin: 0 10px 0 16px;
+          color: #45464e;
+        }
+
+        &:first-child {
+          padding-left: 0;
+          &::before {
+            content: none;
+            margin: 0;
+          }
+        }
+
+        &:last-child {
+          pointer-events: none;
+          cursor: default;
+          padding-right: 0;
+        }
+
+        a {
+          color: $highlight-color;
+          text-decoration: none;
+          &:hover {
+            color: $breadcrumb-hover-color;
+          }
+        }
+      }
+    }
+  }
+
+  .button-close {
+    float: right;
+    text-decoration: none;
+    color: #45464e;
+  }
+}
