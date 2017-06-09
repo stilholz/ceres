@@ -34,22 +34,24 @@
             </div>
 
             {# MARKUP #}
-            <div class="top-menu">
-                <ul class="breadcrumb">
-                    <li transition="breadcrumb-item" v-for="item in getBreadcrumbItems(activeItem)" v-bind:key="item.id">
-                        <a href="#" v-on:click="triggerItem(item.id, 'back')">{{ item.title }}</a>
-                    </li>
-                </ul>
+            <div id="MobileNavigation" style="display:none" ref="MobileNavigation">
+                <div class="top-menu">
+                    <ul class="breadcrumb">
+                        <li transition="breadcrumb-item" v-for="item in getBreadcrumbItems(activeItem)" v-bind:key="item.id">
+                            <a href="#" v-on:click="triggerItem(item.id, 'back')">{{ item.title }}</a>
+                        </li>
+                    </ul>
 
-                <a class="button-close" href="#" onclick="$('#MobileNavigation').trigger('close');">X</a>
-            </div>
-            <div class="menu-wrap">
-                <ul v-menu class="menu menu-{{ menuIndex }}" v-for="(menuIndex, menu) in getGroupedMenus()">
-                    <li class="menu-item" v-bind:class="{ 'has-sub': itemHasChildren(item), 'has-url': item.url }" v-for="item in menu" v-bind:key="item.id">
-                        <a href="#" v-on:click="triggerItem(item.id, 'useUrl')">{{ item.title }}</a>
-                        <a class="dots" href="#" v-on:click="triggerItem(item.id)" v-if="itemHasChildren(item)">...</a>
-                    </li>
-                </ul>
+                    <a class="button-close" href="#" onclick="$('#MobileNavigation').trigger('close');">X</a>
+                </div>
+                <div class="menu-wrap">
+                    <ul v-menu class="menu menu-{{ menuIndex }}" v-for="(menuIndex, menu) in getGroupedMenus()">
+                        <li class="menu-item" v-bind:class="{ 'has-sub': itemHasChildren(item), 'has-url': item.url }" v-for="item in menu" v-bind:key="item.id">
+                            <a href="#" v-on:click="triggerItem(item.id, 'useUrl')">{{ item.title }}</a>
+                            <a class="dots" href="#" v-on:click="triggerItem(item.id)" v-if="itemHasChildren(item)">...</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             {# /MARKUP #}
         </div>
