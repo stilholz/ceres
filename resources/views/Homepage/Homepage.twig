@@ -24,6 +24,8 @@
 
 {% block PageBody %}
 
+    HOMEPAGE CHECK: {{ services.template.isHome() }}
+
     {% if showDefaultHomepage == "true" %}
 
         {% include 'Ceres::Homepage.MarketingHomepage.twig' %}
