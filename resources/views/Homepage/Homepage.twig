@@ -24,7 +24,7 @@
 
 {% block PageBody %}
 
-    HOMEPAGE CHECK: {{ services.template.isHome() }}
+    HOMEPAGE CHECK: {{ services.template.isCurrentCategory('tlp.home') }}
 
     {% if showDefaultHomepage == "true" %}
 
