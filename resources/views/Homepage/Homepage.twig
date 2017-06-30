@@ -24,7 +24,7 @@
 
 {% block PageBody %}
 
-    HOMEPAGE CHECK: {{ services.template.isCurrentTemplate('tlp.home') | json_encode() }}
+    HOMEPAGE CHECK: {{ services.template.isCurrentTemplate('tpl.home') | json_encode() }}
 
     {% if showDefaultHomepage == "true" %}
 
