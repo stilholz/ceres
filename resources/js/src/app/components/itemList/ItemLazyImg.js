@@ -5,18 +5,16 @@ Vue.component("item-lazy-img", {
         "template"
     ],
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
     },
 
-    ready: function()
+    ready()
     {
-        var self = this;
-
-        setTimeout(function()
+        setTimeout(() =>
         {
-            $(self.$els.lazyImg).show().lazyload({threshold : 100});
+            $(this.$els.lazyImg).show().lazyload({threshold : 100});
         }, 1);
     }
 });
