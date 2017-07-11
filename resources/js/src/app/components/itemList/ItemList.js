@@ -8,7 +8,7 @@ Vue.component("item-list", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             itemList: {},
@@ -17,14 +17,14 @@ Vue.component("item-list", {
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
 
         ItemListService.setCategoryId(this.categoryId);
     },
 
-    ready: function()
+    ready()
     {
         ResourceService.bind("itemList", this);
         ResourceService.bind("isLoading", this);
