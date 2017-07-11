@@ -11,7 +11,7 @@ Vue.component("items-per-page", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             itemSearch: {},
@@ -19,38 +19,32 @@ Vue.component("items-per-page", {
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
 
-        this.initPaginationValues();
         ResourceService.bind("itemSearch", this);
+
+        this.initPaginationValues();
         this.setSelectedValueByUrl();
     },
 
     methods:
     {
-        itemsPerPageChanged: function()
+        itemsPerPageChanged()
         {
             ItemListService.setItemsPerPage(this.itemSearch.items);
             ItemListService.setPage(1);
             ItemListService.getItemList();
         },
 
-        setSelectedValueByUrl: function()
+        setSelectedValueByUrl()
         {
-            var urlParams = UrlService.getUrlParams(document.location.search);
+            const urlParams = UrlService.getUrlParams(document.location.search);
 
-            if (urlParams.items)
+            if (urlParams.items && this.paginationValues.indexOf(urlParams.items) > -1)
             {
-                if (this.paginationValues.indexOf(urlParams.items) > -1)
-                {
-                    this.itemSearch.items = urlParams.items;
-                }
-                else
-                {
-                    this.itemSearch.items = App.config.defaultItemsPerPage;
-                }
+                this.itemSearch.items = urlParams.items;
             }
             else
             {
@@ -60,9 +54,9 @@ Vue.component("items-per-page", {
             ItemListService.setItemsPerPage(this.itemSearch.items);
         },
 
-        initPaginationValues: function()
+        initPaginationValues()
         {
-            for (var rowKey in this.rowsPerPage)
+            for (const rowKey in this.rowsPerPage)
             {
                 this.paginationValues.push(this.rowsPerPage[rowKey] * this.columnsPerPage);
             }
