@@ -22,7 +22,12 @@
     {% set sorting = request.get("sorting") %}
 {% endif %}
 
+{% set loadingAnimationType = config("Ceres.item.loading_animation_type") %}
+
 {% set paginatedResult = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.search, {'query': request.get("query"), 'page': page, 'items': itemsPerPage, 'sorting':  sorting, 'variationShowType': config("Ceres.item.variation_show_type")}) %}
+
+{% set itemList = paginatedResult.documents %}
+
 {% block PageBody %}
 
     {{ component( "Ceres::ItemList.Components.ItemList" ) }}
@@ -65,9 +70,22 @@
         <div class="row">
             <div class="col-xs-12">
 
-                <div id="vue-rendered-item-list" class="item-list-frame">
-                    <item-list template="#vue-item-list"></item-list>
+                <div id="twig-rendered-item-list" class="item-list-frame{% if loadingAnimationType == "blur" %} blur-effect{% endif %}">
+
+                    {% if loadingAnimationType != "blur" %}
+                        {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+                    {% endif %}
+
+                    <ul class="product-list row grid" v-is-loading-watcher>
+                        {% for item in itemList %}
+                            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-{% if showHeaderNavBar == "side" or showHeaderNavBar == "both" %}4{% else %}3{% endif %}">
+                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
+
+                <item-list template="#vue-item-list" :category-id="{{ category.id }}" style="display:none"></item-list>
 
             </div>
         </div>
