@@ -31,7 +31,7 @@ Vue.component("item-store-special", {
     {
         ResourceService.bind("localization", this);
 
-        this.tagClass = this.tagClasses[this.storeSpecial.id] || tagClasses.default;
+        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
         this.label = this.getLabel();
     },
 
