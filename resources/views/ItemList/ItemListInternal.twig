@@ -1,0 +1,112 @@
+{{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
+{{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
+
+{% set itemLists = {} %}
+
+{% if item.LastSeenItemsList %}
+    {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ ".last_seen.position") %}
+    {% set LastSeenItemsList = {"LastSeenItemsList": pos} %}
+    {% set itemLists = itemLists | merge (LastSeenItemsList) %}
+{% endif %}
+
+{% if item.TagItemsList %}
+    {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ ".tag_list.position") %}
+    {% set TagItemsList = {"TagItemsList": pos} %}
+    {% set itemLists = itemLists | merge (TagItemsList) %}
+{% endif %}
+
+{% if item.CrossSellingItemsListSimilar %}
+    {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ ".cross.similar.position") %}
+    {% set CrossSellingItemsListSimilar = {"CrossSellingItemsListSimilar": pos} %}
+    {% set itemLists = itemLists | merge (CrossSellingItemsListSimilar) %}
+{% endif %}
+
+{% if item.CrossSellingItemsListAccessory %}
+    {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ ".cross.accessory.position") %}
+    {% set CrossSellingItemsListAccessory = {"CrossSellingItemsListAccessory": pos} %}
+    {% set itemLists = itemLists | merge (CrossSellingItemsListAccessory) %}
+{% endif %}
+
+{% if item.CrossSellingItemsListReplacement %}
+    {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ ".cross.replacement.position") %}
+    {% set CrossSellingItemsListReplacement = {"CrossSellingItemsListReplacement": pos} %}
+    {% set itemLists = itemLists | merge (CrossSellingItemsListReplacement) %}
+{% endif %}
+
+{% if item.CrossSellingItemsListCollection %}
+    {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ ".cross.collection.position") %}
+    {% set CrossSellingItemsListCollection = {"CrossSellingItemsListCollection": pos} %}
+    {% set itemLists = itemLists | merge (CrossSellingItemsListCollection) %}
+{% endif %}
+
+{% for itemList in itemLists | sort | keys %}
+    
+    {% set randomIdentifier = random() %}
+
+    {% set listName = config("Ceres.item.lists." ~ currentTemplate ~ "." ~ itemList ~ "." ~ services.sessionStorage.getLang() ~ ".name") %}
+
+    {% set isNameEmpty = listName == 'DE name' or listName == 'EN name' or listName is empty %}
+
+    {% if item[itemList].total > 0 %}
+        <hr>
+
+        <p class="h3">
+            {% if isNameEmpty %}
+                {{ trans("Ceres::Template.itemList" ~ itemList) }}
+            {% else %}
+                {{ listName }}
+            {% endif %}
+        </p>
+
+        <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                {% if item[itemList].total > 4 %}
+                    <div id="list-carousel-{{ randomIdentifier }}" class="list-item-carousel owl-carousel owl-theme owl-single-item">      
+                        {% for itemListItem in item[itemList].documents %}    
+                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': itemListItem, enableCarousel: false, 'tags': item.data.tags, 'showOrderProperties': false } %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <ul id="list-carousel-{{ randomIdentifier }}" class="product-list row grid">
+                        {% for itemListItem in item[itemList].documents %}
+                            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': itemListItem, enableCarousel: false, 'tags': item.data.tags, 'showOrderProperties': false } %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if item[itemList].total > 4 %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function()
+                {
+                    $("#list-carousel-{{ randomIdentifier }}").owlCarousel({
+                        autoHeight       : true,
+                        dots             : true,
+                        items            : 4,
+                        lazyLoad         : false,
+                        loop             : false,
+                        margin           : 10,
+                        mouseDrag        : true,
+                        nav              : true,
+                        navClass         : [
+                            "owl-single-item-nav left carousel-control list-control-special",
+                            "owl-single-item-nav right carousel-control list-control-special"
+                        ],
+                        navContainerClass: "",
+                        navText          : [
+                            "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
+                            "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
+                        ],
+                        smartSpeed       : 350,
+                    });
+                });
+            </script>
+        {% endif %}
+
+    {% endif %}
+{% endfor %}
+
