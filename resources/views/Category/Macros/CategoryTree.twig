@@ -28,6 +28,7 @@
 {% macro get_nav_bar(categories, currentScopeUrl) %}
     {% import _self as navbar %}
     {% set counter = 0 %}
+    {% set megamenuLevels = config('Ceres.header.megamenu_levels') %}
 
     {% for category in categories %}
 
@@ -44,14 +45,14 @@
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </span>
                     
-                    {% if config('Ceres.header.megamenu_levels') > 1 %}
+                    {% if megamenuLevels > 1 %}
                     <div class="navDropdown_wrapper">
                     {% endif %}
 
                     <ul data-level="1" id="navDropdown{{ counter }}" class="collapse"{% if config('Ceres.header.megamenu_align') == "1" %} style="-webkit-box-align: start;-ms-flex-align: start;align-items: flex-start;"{% endif %}>
 
                         {% set counter = counter + 1 %}
-                        {% if config('Ceres.header.megamenu_levels')=="1" %}
+                        {% if megamenuLevels == "1" %}
                             {% for child in category.children %}
                                 {% if child.details | length > 0 %}
                                     <li>
@@ -63,7 +64,7 @@
                             {{ navbar.get_children(category, currentScopeUrl, 1) }}
                         {% endif %}
                     </ul>
-                    {% if config('Ceres.header.megamenu_levels') > 1 %}
+                    {% if megamenuLevels > 1 %}
                     </div>
                     {% endif %}
                 </li>
