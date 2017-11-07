@@ -1,5 +1,3 @@
-const NotificationService = require("services/NotificationService");
-
 Vue.component("order-return", {
 
     props: [
@@ -41,9 +39,7 @@ Vue.component("order-return", {
             this.sendOrderReturn().then(
                 response =>
                 {
-                    NotificationService.success(Translations.Template.myAccountReturnSuccess);
-
-                    window.open("/my-account", "_self");
+                    window.open("/return-confirmation", "_self");
                     $(this.$els.orderReturnConfirmation).modal("hide");
                 },
                 error =>
@@ -57,6 +53,10 @@ Vue.component("order-return", {
         {
             this.$broadcast("select-all-items");
         },
+
+        ...Vuex.mapMutations([
+            "updateOrderReturnNote"
+        ]),
 
         ...Vuex.mapActions([
             "sendOrderReturn"

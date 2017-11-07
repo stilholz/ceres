@@ -1,10 +1,59 @@
 # Release Notes for Ceres
 
-## v1.5.x (TBA)
+## v1.6.2 (2017-10-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.1...1.6.2" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- In the return history, only four images per order are loaded initially.
+- In the return history, a "Show more" button was added.
+- If items with order properties are in the basket, each surcharge is followed by "per item".
+- After the customer has filed a return request, they are forwarded to a confirmation page.
+
+### Fixed
+
+- The returns tab in the My account area is deactivated if the customer does not have any returns.
+
+## v1.6.1 (2017-10-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.0...1.6.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Add
+
+- Meta descriptions and robots settings for static pages of the online store can now be entered in the **SEO** tab. For further information about this, refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#201" target="_blank"><b>Carrying out settings for search engine optimisation</b></a>.
+
+### Changed
+
+- **Name of your store** and **URL to your company logo** have been moved to the **Global** tab of the configuration.
+- The **Allow returns** setting has been added in the **Checkout and My account** tab of the configuration and replaced the old setting for activating returns in the plentymarkets back end.
+
+## 1.6.0 (2017-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.1...1.6.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Graduated prices are now integrated in Ceres and will be displayed below the order properties in the single item view. For further information about graduated prices, refer to <a href="https://knowledge.plentymarkets.com/en/item/managing-items#870" target="_blank"><b>Managing sales prices</b></a>.
+
+### Changed
+
+- The text of order properties will not be displayed in the shopping cart preview anymore. 
+- Order properties will now be displayed above the price in the single item view.
+- In the single item view, the item price is now calculated considering surcharges for order properties and graduated prices.
+- The item price is now calculated considering surcharges for order properties and graduated prices in the **Add to shopping cart** overlay.
+- In the order history, the clock icon has been replaced with a text.
+- In the return history, the clock icon has been replaced with a text.
+
+## v1.5.1 (2017-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.0...1.5.1" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
 
 - The **Container for customer feedback** container has been added.
+
+### Changed
+
+- Der template container **Single item: Add detail tabs** now contains the current `Item` object.
+- Der template container **Single item: Add content to detail tabs** now contains the current `Item` object.
+
+### Fixed
+
+- Surcharges for order properties are now correctly displayed in the shopping cart and shopping cart preview.
+- In the **My account** area the note **Payment method cannot be changed** will be hidden as soon as the order was paid.
 
 ## v1.5.0 (2017-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.7...1.5.0" target="_blank"><b>Overview of all changes</b></a>
 
